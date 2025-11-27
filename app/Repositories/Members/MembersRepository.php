@@ -1,0 +1,77 @@
+<?php
+
+namespace App\Repositories\Members;
+
+use App\Models\Members;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+
+class MembersRepository implements MembersRepositoryInterface
+{
+    public function __construct(
+        protected Members $model
+    ) {
+    }
+
+    /**
+     * Get all members.
+     */
+    public function getAll(): Collection
+    {
+        return $this->model->all();
+    }
+
+    /**
+     * Get paginated members list.
+     */
+    public function paginate(int $perPage = 15): LengthAwarePaginator
+    {
+        return $this->model->paginate($perPage);
+    }
+
+    /**
+     * Find member by id.
+     */
+    public function find(int $id): ?Members
+    {
+        return $this->model->find($id);
+    }
+
+    /**
+     * Create a new member.
+     */
+    public function create(array $data): Members
+    {
+        return $this->model->create($data);
+    }
+
+    /**
+     * Update a member by id.
+     */
+    public function update(int $id, array $data): bool
+    {
+        $member = $this->find($id);
+
+        if (! $member) {
+            return false;
+        }
+
+        return $member->update($data);
+    }
+
+    /**
+     * Delete a member by id.
+     */
+    public function delete(int $id): bool
+    {
+        $member = $this->find($id);
+
+        if (! $member) {
+            return false;
+        }
+
+        return (bool) $member->delete();
+    }
+}
+
+
