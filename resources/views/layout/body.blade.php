@@ -14,6 +14,7 @@
 
             <!--  Header Start -->
             @include('layout.header')
+
             <!--  Header End -->
             @yield('content')
         </div>

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\MembersController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MembersController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ProjectsController;
 
 Route::get('/report', [ReportsController::class, 'index'])->name('report.index');
 
@@ -13,3 +14,5 @@ Route::get('/members/{member}', [MembersController::class, 'show'])->name('membe
 Route::get('/members/{member}/edit', [MembersController::class, 'edit'])->name('members.edit');
 Route::put('/members/{member}', [MembersController::class, 'update'])->name('members.update');
 Route::delete('/members/{member}', [MembersController::class, 'destroy'])->name('members.destroy');
+
+Route::post('/projects', [ProjectsController::class, 'store'])->name('projects.store');

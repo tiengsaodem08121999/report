@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Members;
-use App\Repositories\Members\MembersRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Repositories\Members\MembersRepositoryInterface;
 use App\Repositories\Projects\ProjectsRepositoryInterface;
 
 class MembersController extends Controller
