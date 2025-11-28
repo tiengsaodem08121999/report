@@ -4,11 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Members\MembersRepositoryInterface;
+use App\Repositories\Projects\ProjectsRepositoryInterface;
+use App\Services\RedmineService;
 
 class ReportsController extends Controller
 {
-    public function index()
+
+    protected MembersRepositoryInterface $membersRepository;
+    protected ProjectsRepositoryInterface $projectsRepository;
+    protected $redmineService;
+
+    public function __construct(
+        MembersRepositoryInterface $membersRepository, 
+        ProjectsRepositoryInterface $projectsRepository,
+        RedmineService $redmineService
+        ) {
+        $this->membersRepository = $membersRepository;
+        $this->projectsRepository = $projectsRepository;
+        $this->redmineService = $redmineService;
+    }
+
+    public function index(Request $request)
     {
-        return view('pages.report');
+        $day = $request->get('day') ?? now()->format('Y-m-d');
+        $project = $request->get('project', 'kass');
+        if($request->get('day'))
+        $reports = [];
+        if($project) {
+            $reports = $this->redmineService->fetchDailyReport($day, $project);
+        }
+        return view('pages.report', compact('reports'));
     }
 }
