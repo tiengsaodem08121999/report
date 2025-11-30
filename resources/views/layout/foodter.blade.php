@@ -6,6 +6,7 @@
 <script src="{{asset('flexy-bootstrap-lite-1.0.0/assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
 <script src="{{asset('flexy-bootstrap-lite-1.0.0/assets/libs/simplebar/dist/simplebar.js')}}"></script>
 <script src="{{asset('flexy-bootstrap-lite-1.0.0/assets/js/dashboard.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <!-- solar icons -->
 <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 

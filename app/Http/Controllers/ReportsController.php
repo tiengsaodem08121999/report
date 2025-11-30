@@ -28,8 +28,8 @@ class ReportsController extends Controller
     public function index(Request $request)
     {
         $day = $request->get('day') ?? now()->format('Y-m-d');
-        $project = $request->get('project', 'kass');
-        if($request->get('day'))
+        $project = $request->get('project');
+
         $reports = [];
         if($project) {
             $reports = $this->redmineService->fetchDailyReport($day, $project);

@@ -9,9 +9,10 @@
         <li class="nav-item dropdown">
           <div class="ms-auto mt-3 mt-md-0">
             <select class="form-select" aria-label="Default select example">
-              <option value="1">Select Project</option>
-              <option value="2">Project 2</option>
-              <option value="3">Project 3</option>
+              <option value="">Select Project</option>
+              @foreach($projects as $project)
+                <option value="{{$project->project_name}}" {{request()->get('project') == $project->project_name ? 'selected' : '' }}>{{$project->project_name}}</option>
+              @endforeach
             </select>
           </div>
         </li>
@@ -50,7 +51,8 @@
   <script>
     $(document).ready(function() {
       $('.form-select').on('change', function() {
-        
+        const projectId = $(this).val();
+          window.location.href = `{{route('report.index')}}?project=${projectId}`;
         });
       });
     </script>

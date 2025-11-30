@@ -22,11 +22,14 @@
                 <h4 class="card-title">Report {{now()->format('d-m-Y')}}</h4>
               </div>
               <div class="ms-auto mt-3 mt-md-0">
-                <select class="form-select" aria-label="Default select example">
-                  <option value="1">March 2025</option>
-                  <option value="2">March 2025</option>
-                  <option value="3">March 2025</option>
-                </select>
+                <form action="{{ route('report.index') }}" method="get" class="d-flex">
+                  <input type="text" 
+                      id="dateInput"
+                      name="date" 
+                      value="{{ request()->get('date') ?? date('Y-m-d') }}"
+                      class="form-control me-2">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
               </div>
             </div>
             <div class="table-responsive mt-4">
@@ -93,3 +96,19 @@
   </div>
 </div>
 @endsection
+@push('script')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      flatpickr("#dateInput", {
+          dateFormat: "Y-m-d",
+          defaultDate: "{{ request()->get('date') ?? date('Y-m-d') }}",
+          disable: [
+              function(date) {
+                  // disable Thứ 7 (6) và CN (0)
+                  return (date.getDay() === 0 || date.getDay() === 6);
+              }
+          ]
+      });
+  });
+</script>
+@endpush
