@@ -23,13 +23,19 @@
               </div>
               <div class="ms-auto mt-3 mt-md-0">
                 <form action="{{ route('report.index') }}" method="get" class="d-flex">
-                  <input type="text" 
-                      id="dateInput"
-                      name="date" 
-                      value="{{ request()->get('date') ?? date('Y-m-d') }}"
-                      class="form-control me-2">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
+                    @foreach(request()->query() as $key => $value)
+                        @if($key !== 'date')
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                        @endif
+                    @endforeach
+                    <input 
+                        type="date"
+                        name="date"
+                        value="{{ request()->get('date') ?? date('Y-m-d') }}"
+                        class="form-control me-2"
+                    >
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
               </div>
             </div>
             <div class="table-responsive mt-4">
@@ -96,19 +102,3 @@
   </div>
 </div>
 @endsection
-@push('script')
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-      flatpickr("#dateInput", {
-          dateFormat: "Y-m-d",
-          defaultDate: "{{ request()->get('date') ?? date('Y-m-d') }}",
-          disable: [
-              function(date) {
-                  // disable Thứ 7 (6) và CN (0)
-                  return (date.getDay() === 0 || date.getDay() === 6);
-              }
-          ]
-      });
-  });
-</script>
-@endpush

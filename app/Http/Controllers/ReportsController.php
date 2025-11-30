@@ -27,12 +27,11 @@ class ReportsController extends Controller
 
     public function index(Request $request)
     {
-        $day = $request->get('day') ?? now()->format('Y-m-d');
+        $date = $request->get('date') ?? now()->format('Y-m-d');
         $project = $request->get('project');
-
         $reports = [];
         if($project) {
-            $reports = $this->redmineService->fetchDailyReport($day, $project);
+            $reports = $this->redmineService->fetchDailyReport($date, $project);
         }
         return view('pages.report', compact('reports'));
     }
