@@ -33,24 +33,33 @@
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input type="text" name="name" class="form-control" required>
+                                            <input type="text" name="name" class="form-control">
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="key">Key</label>
-                                            <input type="text" name="key" class="form-control" required>
+                                            <input type="text" name="key" class="form-control">
+                                            @error('key')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="key">Project</label>
-                                            <select name="project_id" class="form-control" required>
+                                            <select name="project_id" class="form-control">
                                                 <option value="">Select Project</option>
                                                 @foreach ($projects as $project)
                                                     <option value="{{ $project->id }}">{{ $project->project_name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('project_id')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 mt-3">

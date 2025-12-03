@@ -29,12 +29,13 @@ class ReportsController extends Controller
     {
         $date = $request->get('date') ?? now()->format('Y-m-d');
         $project = $request->get('project');
+        $memberForReports = [];
         session( ['data_search'=> ['date' => $date, 'project' => $project]]);
         $members = $this->membersRepository->getMemberByProject($project);
-        $memberForReports = config('information.developer_report')[$project];
         $reports = [];
         if($project) {
             $reports = $this->redmineService->fetchDailyReport($date, $project);
+            $memberForReports = config('information.developer_report')[$project];
         }
         return view('pages.report', compact('reports','members','memberForReports'));
     }

@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Members;
 
-use App\Models\Members;
+use App\Models\Member;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
@@ -23,12 +23,12 @@ interface MembersRepositoryInterface
     /**
      * Find member by id.
      */
-    public function find(int $id): ?Members;
+    public function find(int $id): ?Member;
 
     /**
      * Create a new member.
      */
-    public function create(array $data): Members;
+    public function create(array $data): Member;
 
     /**
      * Update a member by id.

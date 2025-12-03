@@ -9,8 +9,8 @@ class Member extends Model
     protected $table = 'members';
 
     protected $fillable = [
-        'name',
-        'key',
-        'product_id',
+        "name",
+        "key",
+        "project_id",
     ];
 }

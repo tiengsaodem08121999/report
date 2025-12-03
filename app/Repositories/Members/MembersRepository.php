@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Members;
 
-use App\Models\Members;
+use App\Models\Member;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class MembersRepository implements MembersRepositoryInterface
 {
     public function __construct(
-        protected Members $model
+        protected Member $model
     ) {
     }
 
@@ -32,7 +32,7 @@ class MembersRepository implements MembersRepositoryInterface
     /**
      * Find member by id.
      */
-    public function find(int $id): ?Members
+    public function find(int $id): ?Member
     {
         return $this->model->find($id);
     }
@@ -40,7 +40,7 @@ class MembersRepository implements MembersRepositoryInterface
     /**
      * Create a new member.
      */
-    public function create(array $data): Members
+    public function create(array $data): Member
     {
         return $this->model->create($data);
     }
@@ -78,7 +78,7 @@ class MembersRepository implements MembersRepositoryInterface
      */
     public function getMemberByProject($project_name): Collection
     {
-        $member = $this->model->join('projects','projects.id','members.product_id')
+        $member = $this->model->join('projects','projects.id','members.project_id')
                     ->where('projects.project_name', $project_name)
                     ->select('members.*')
                     ->get();
