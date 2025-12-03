@@ -8,7 +8,7 @@
             </li>
             <li class="nav-item dropdown">
                 <div class="ms-auto mt-3 mt-md-0">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select select_project" aria-label="Default select example">
                         <option value="">Select Project</option>
                         @foreach ($projects as $project)
                             <option value="{{ $project->project_name }}"
@@ -54,7 +54,7 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('.form-select').on('change', function() {
+            $('.select_project').on('change', function() {
                 const projectId = $(this).val();
                 const params = new URLSearchParams(window.location.search);
                 params.set('project', projectId);

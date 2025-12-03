@@ -19,4 +19,4 @@
             @yield('content')
         </div>
     </div>
-@include('layout.foodter')
+@include('layout.footer')

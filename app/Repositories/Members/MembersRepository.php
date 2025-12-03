@@ -72,6 +72,18 @@ class MembersRepository implements MembersRepositoryInterface
 
         return (bool) $member->delete();
     }
+
+    /**
+     * Get member by project name.
+     */
+    public function getMemberByProject($project_name): Collection
+    {
+        $member = $this->model->join('projects','projects.id','members.product_id')
+                    ->where('projects.project_name', $project_name)
+                    ->select('members.*')
+                    ->get();
+        return $member;
+    }
 }
 
 

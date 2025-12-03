@@ -38,6 +38,23 @@ class ProjectsRepository implements ProjectsRepositoryInterface
     }
 
     /**
+     * Find project by Key.
+     */
+    public function getProjetByKey(array $key): ?Projects
+    {
+        $model =  $this->model;
+        if (isset($key['redmine_project_id'])) {
+            $model = $model->where('redmine_project_id', $key['redmine_project_id']);
+        }
+        
+        if (isset($key['project_name'])) {
+            $model = $model->where('project_name', $key['project_name']);
+        }
+
+        return $model->first();
+    }
+
+    /**
      * Create a new project.
      */
     public function create(array $data): Projects

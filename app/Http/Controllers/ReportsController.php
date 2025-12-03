@@ -29,10 +29,26 @@ class ReportsController extends Controller
     {
         $date = $request->get('date') ?? now()->format('Y-m-d');
         $project = $request->get('project');
+        session( ['data_search'=> ['date' => $date, 'project' => $project]]);
+        $members = $this->membersRepository->getMemberByProject($project);
         $reports = [];
         if($project) {
             $reports = $this->redmineService->fetchDailyReport($date, $project);
         }
-        return view('pages.report', compact('reports'));
+        return view('pages.report', compact('reports','members'));
+    }
+
+    public function store(Request $request)
+    {
+        $date = $request->get('date') ?? now()->format('Y-m-d');
+        $project = $this->projectsRepository->getProjetByKey([$request->get('project')])->redmine_project_id;
+        $data = $this->redmineService->getUserTasks($date, $project->redmine_project_id);
+        $result = $this->redmineService->createDailyReport($data ,  $project->project_name);
+
+        if (isset($result['error'])) {
+            return redirect()->route('report')->with('error', $result['error']);
+        }
+        return redirect()->route('report')->with('success', 'Báo cáo đã được tạo thành công trên Redmine')
+                ->with('report_id', $result['issue']['id']);  
     }
 }

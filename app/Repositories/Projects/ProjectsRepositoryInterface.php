@@ -26,6 +26,11 @@ interface ProjectsRepositoryInterface
     public function find(int $id): ?Projects;
 
     /**
+     * Find project by key.
+     */
+    public function getProjetByKey(array $key): ?Projects;
+
+    /**
      * Create a new project.
      */
     public function create(array $data): Projects;
