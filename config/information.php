@@ -1,0 +1,54 @@
+<?php
+    return [
+        'assignee' => [
+            'DuongNT' => 758,
+            'KietNA' => 1297,
+            'ChuongNPN' => 1310,
+            'QuyLV' => 1261,
+            'YenNH' => 1402,
+            'PhuDT' => 996,
+            'VinhDV' => 1447,
+            'AnTNM' => 1300,
+            'ThienND' => 1416,
+            'DuyTT' => 1381,
+            'HungBT' => 1283,
+            'HaoNV' => 1365,
+        ],
+        'tracker' => [
+            'Task' => 5,
+            'Bug' => 1,
+            'CR' => 4,
+        ],
+        'user_for_key' => [ 
+            'DuyTT'   => 'd907216f0dcf2ef54f7ee4b5e950c5c8bb35b171',
+            'QuyLV'   => 'c8b8b032bbcd19995fe294d1f193c9b7f66a8aaa',
+            'KietNA'  => 'ece23009da9170c5d5edb0c1ef1095db5657f9f4',
+            'DuongNT' => 'cad5eb98b070c1ee75330031c0e34ed4cd412eb1',
+            'NganPVH' => 'cc513ebd6bc00327f89c368199fc8fc928de8a97',
+            'HiepNC'  => 'ea3082c4caebd54029c33888f03f6b449b23b570',
+            'ToanKH'  => '3d5be992497340c5e7d199b7e5eee44321c5610a',
+            'ThinhNLP' => '7160417783dff1b4125c45bef63cf179c5b845b7',
+            'ThienND' => '81baff340b161e0c9799bfda7268c01afaed772b',
+            'BaoNC'   => 'ccfb34b990cdfbe81cf792d20db064123e7bd118',
+            'HoangVH' => '71afbf6eac0317507cfcb36da89d4cf49a735f5a',
+            'QuynhDT' => '0305460dc3611efc221f21526b535a6e7e0a4ba1', 
+            'NhanTCH' => 'e34d101af43cfccd2d742ef28cc59c13810710d3',
+            'TranHTB' => '092d1f5ca87a44a5c5ecf954f4a14390f4307f65',
+        ],
+        'developer_report' => [
+            "kass" => [
+                'VinhDV', 
+                'PhuDT', 
+                'YenNH',
+                'QuyLV', 
+                'KietNA', 
+                'NhanTCH',
+            ],
+            "s7-ec-cube"=> [
+                'DuongNT',
+                'ChuongNPN',
+                'QuynhDT',
+                'TranHTB', 
+            ]
+        ],
+];
