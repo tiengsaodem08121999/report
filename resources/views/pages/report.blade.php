@@ -10,12 +10,19 @@
     </style>
 @endpush
 @section('content')
+
     <div class="body-wrapper-inner">
         <div class="container-fluid">
             <!--  Row 1 -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session('report_id'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ 'https://redmine.splus-software.com/issues/' . session('report_id') }}<br>
+                                {{ 'em gui report ngày ' . now()->format('d/m/Y') }}
+                            </div>
+                        @endif
                         <div class="card-body">
                             <div class="d-md-flex align-items-center">
                                 <div>
@@ -217,6 +224,8 @@
                 <div class="modal-footer">
                     <form action="{{ route('report.store') }}" method="POST">
                         @csrf
+                        <input type="hidden" name="date" value="{{ request()->get('date') ?? date('Y-m-d') }}">
+                        <input type="hidden" name="project" value="{{ request()->get('project') }}">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </form>

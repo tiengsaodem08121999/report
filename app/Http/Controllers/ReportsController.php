@@ -42,15 +42,15 @@ class ReportsController extends Controller
 
     public function store(Request $request)
     {
-        $date = $request->get('date') ?? now()->format('Y-m-d');
-        $project = $this->projectsRepository->getProjetByKey([$request->get('project')])->redmine_project_id;
+        $date = $request->get('date');
+        $project = $this->projectsRepository->getProjetByKey([$request->get('project')]);
         $data = $this->redmineService->getUserTasks($date, $project->redmine_project_id);
-        $result = $this->redmineService->createDailyReport($data ,  $project->project_name);
+        $result = $this->redmineService->createDailyReport($data , $request->get('project'));
 
         if (isset($result['error'])) {
-            return redirect()->route('report')->with('error', $result['error']);
+            return redirect()->route('report.index')->with('error', $result['error']);
         }
-        return redirect()->route('report')->with('success', 'Báo cáo đã được tạo thành công trên Redmine')
+        return redirect()->route('report.index')->with('success', 'Báo cáo đã được tạo thành công trên Redmine')
                 ->with('report_id', $result['issue']['id']);  
     }
 }

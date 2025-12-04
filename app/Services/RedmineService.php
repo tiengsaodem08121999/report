@@ -217,7 +217,7 @@ class RedmineService
             $subject = '日報　' . date('Y年n月j日');
             // Today's tasks section
             $description = "*1.【本日のタスク】*\n\n";
-            $description .= $this->formatTasksTable($data) . "\n\n";
+            $description .= $this->formatTasksTable($data, $project) . "\n\n";
             $response = $this->client->request('POST', "{$this->baseUrl}/issues.json", [
                 'headers' => [
                     'Content-Type' => 'application/json',
@@ -246,12 +246,12 @@ class RedmineService
         }
     }
 
-    private function formatTasksTable($data)
+    private function formatTasksTable($data, $project)
     {
         $table = "|_. # |_. 開発者 |_. ID タスク |_. ステータス |_. 備考 |\n";
         $index = 1;
         $splus = 'Splus.';
-        $developers = config('information.developer_report');
+        $developers = config('information.developer_report')[$project];
 
         foreach ($developers as $dev) {
             $taskContents = [];
