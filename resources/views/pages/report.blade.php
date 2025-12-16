@@ -235,10 +235,5 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-        //     myModal.show();
-        // });
-    </script>
+
 @endpush

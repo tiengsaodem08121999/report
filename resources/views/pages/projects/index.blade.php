@@ -54,7 +54,8 @@
                                                                 <input type="hidden" name="member_id"
                                                                     value="{{ $member->id }}">
                                                                 <div>
-                                                                    <button type="submit" class="btn"> <i class="fa-regular fa-trash-can"></i>
+                                                                    <button type="submit" class="btn"> <i
+                                                                            class="fa-regular fa-trash-can"></i>
                                                                     </button>
                                                                     {{ $member->name }}
                                                                 </div>
@@ -77,7 +78,8 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @push('scripts')
-    @endpush
+@push('scripts')
+@endpush
