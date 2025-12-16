@@ -43,7 +43,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-12 mt-3">
+                                    <div class="col-12 mt-3 d-flex gap-2">
                                         <button type="submit" class="btn btn-primary">Create</button>
                                     </div>
                                 </div>
@@ -120,7 +120,9 @@
             $('#memberForm').attr('action', updateUrl);
           
             $('button[type=submit]').text('Update');
-            $('#memberForm').append('<button type="button" id="cancelEdit" class="btn btn-danger mt-2">Cancel</button>');
+            if ($('#cancelEdit').length === 0){
+                $('#memberForm').append('<button type="button" id="cancelEdit" class="btn btn-danger mt-2">Cancel</button>');
+            }
         });
         $(document).on('click', '#cancelEdit', function() {
             $('#name').val('');
