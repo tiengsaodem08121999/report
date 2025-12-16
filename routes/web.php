@@ -14,7 +14,7 @@ Route::get('/members/create', [MembersController::class, 'create'])->name('membe
 Route::post('/members', [MembersController::class, 'store'])->name('members.store');
 Route::get('/members/{member}', [MembersController::class, 'show'])->name('members.show');
 Route::get('/members/{member}/edit', [MembersController::class, 'edit'])->name('members.edit');
-Route::put('/members/{member}', [MembersController::class, 'update'])->name('members.update');
+Route::post('/members/{member}', [MembersController::class, 'update'])->name('members.update');
 Route::delete('/members/{member}', [MembersController::class, 'destroy'])->name('members.destroy');
 
 Route::post('/logtime', [LogtimeController::class, 'store'])->name('logtime.store');

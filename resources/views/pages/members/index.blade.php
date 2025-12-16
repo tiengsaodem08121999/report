@@ -7,13 +7,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('members.store') }}" method="post">
+                            <form action="{{ route('members.store') }}" method="post" id="memberForm">
                                 @csrf
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input type="text" name="name" class="form-control">
+                                            <input type="text" name="name" id="name" class="form-control">
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -22,7 +22,7 @@
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="key">Key</label>
-                                            <input type="text" name="key" class="form-control">
+                                            <input type="text" name="key" id="key" class="form-control">
                                             @error('key')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -31,10 +31,11 @@
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="key">Project</label>
-                                            <select name="project_id" class="form-control">
+                                            <select name="project_id" id="project_id" class="form-control">
                                                 <option value="">Select Project</option>
                                                 @foreach ($projects as $project)
-                                                    <option value="{{ $project->id }}">{{ $project->project_name }}</option>
+                                                    <option value="{{ $project->id }}">{{ $project->project_name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('project_id')
@@ -63,6 +64,9 @@
                                                 <th scope="col" class="px-0 text-muted">
                                                     Key
                                                 </th>
+                                                <th scope="col" class="px-0 text-muted">
+                                                    project
+                                                </th>
                                                 <th scope="col" class="px-0 text-muted text-end">
                                                     Action
                                                 </th>
@@ -73,15 +77,16 @@
                                                 <tr>
                                                     <td class="px-0">{{ $member->name }}</td>
                                                     <td class="px-0">{{ $member->key }}</td>
+                                                    <td class="px-0">{{ data_get($member, 'project.project_name', '') }}
+                                                    </td>
                                                     <td class="px-0">
-                                                        <a href="{{ route('members.edit', $member->id) }}"
-                                                            class="btn btn-primary">Edit</a>
-                                                        <a href="{{ route('members.destroy', $member->id) }}"
-                                                            class="btn btn-danger">Delete</a>
+                                                        <i class="fa-regular fa-pen-to-square edit-member"
+                                                            data-id={{ $member->id }}></i>
+                                                        <i class="fa-solid fa-trash-can delete-member"
+                                                            data-id={{ $member->id }}></i>
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -96,4 +101,34 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
+@push('scripts')
+    <script>
+        $(document).on('click', '.edit-member', function() {
+            let memberId = $(this).data('id');
+
+            $('#name').val($(this).closest('tr').find('td:eq(0)').text().trim());
+            $('#key').val($(this).closest('tr').find('td:eq(1)').text().trim());
+
+            let projectName = $(this).closest('tr').find('td:eq(2)').text().trim();
+            $('#project_id option').each(function() {
+                $(this).prop('selected', $(this).text().trim() === projectName);
+            });
+
+            let updateUrl = "{{ route('members.update', ':id') }}".replace(':id', memberId);
+            $('#memberForm').attr('action', updateUrl);
+          
+            $('button[type=submit]').text('Update');
+            $('#memberForm').append('<button type="button" id="cancelEdit" class="btn btn-danger mt-2">Cancel</button>');
+        });
+        $(document).on('click', '#cancelEdit', function() {
+            $('#name').val('');
+            $('#key').val('');
+            $('#project_id').val('');
+            $('#memberForm').attr('action', "{{ route('members.store') }}");
+            $('button[type=submit]').text('Create');
+            $(this).remove();
+        });
+    </script>
+@endpush

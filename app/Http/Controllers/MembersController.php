@@ -82,9 +82,24 @@ class MembersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Member $members)
+    public function update($members,Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'key' => 'required|string|max:255',
+                'project_id' => 'nullable|integer',
+            ]);
+            $data = [
+                'name' => $request->name,
+                'key' => $request->key,
+                'project_id' => $request->project_id,
+            ];
+            $this->memberService->updateMember($members, $data);
+            return redirect()->route('members.index')->with('success', 'Member updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**

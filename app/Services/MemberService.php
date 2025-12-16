@@ -27,5 +27,18 @@ class MemberService
             throw new \Exception($e->getMessage());
         }
     }
+
+    public function UpdateMember(int $id, array $data)
+    {
+        try {
+            $updated = $this->membersRepository->update($id, $data);
+            if (! $updated) {
+                throw new \Exception('Member not found');
+            }
+            return true;
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
    
 }

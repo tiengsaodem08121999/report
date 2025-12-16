@@ -18,7 +18,10 @@ class MembersRepository implements MembersRepositoryInterface
      */
     public function getAll(): Collection
     {
-        return $this->model->all();
+        return $this->model
+            ->with('project')
+            ->orderBy('project_id', 'desc')
+            ->get();
     }
 
     /**

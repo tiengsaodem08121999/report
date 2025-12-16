@@ -13,4 +13,9 @@ class Member extends Model
         "key",
         "project_id",
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Projects::class, 'project_id');
+    }
 }
