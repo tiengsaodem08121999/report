@@ -44,6 +44,11 @@ interface MembersRepositoryInterface
      * Get member by project name.
      */
     public function getMemberByProject(int $project_name): Collection;
+
+    /**
+     * Delete member from project.
+     */
+    public function deleteMemberFromProject(int $memberId): bool;
 }
 
 

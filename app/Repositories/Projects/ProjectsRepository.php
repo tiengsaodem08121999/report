@@ -89,6 +89,15 @@ class ProjectsRepository implements ProjectsRepositoryInterface
 
         return (bool) $project->delete();
     }
+
+    /**
+     * Find project with member.
+     */   
+    public function getProjetWithMember(): Collection
+    {
+        $model =  $this->model->with('members')->get();
+        return $model;
+    } 
 }
 
 

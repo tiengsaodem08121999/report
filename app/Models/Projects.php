@@ -11,6 +11,6 @@ class Projects extends Model
 
     public function members()
     {
-        return $this->hasMany(Members::class, 'project_id');
+        return $this->hasMany(Member::class, 'project_id');
     }
 }

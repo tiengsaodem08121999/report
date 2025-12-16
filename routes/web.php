@@ -20,6 +20,6 @@ Route::delete('/members/{member}', [MembersController::class, 'destroy'])->name(
 Route::post('/logtime', [LogtimeController::class, 'store'])->name('logtime.store');
 Route::post('/delete-logtime', [LogtimeController::class, 'deleteSpentTime'])->name('logtime.delete');
 
-
-
+Route::get('/projects', [ProjectsController::class, 'index'])->name('projects.index');
 Route::post('/projects', [ProjectsController::class, 'store'])->name('projects.store');
+Route::post('/projects/delete-member', [ProjectsController::class, 'deleteMemberFromProject'])->name('project.deleteMember');

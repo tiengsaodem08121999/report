@@ -7,26 +7,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('projects.store') }}" method="post">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="name">Project Name</label>
-                                            <input type="text" name="project_name" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                        <button type="submit" class="btn btn-primary">Create</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
                             <form action="{{ route('members.store') }}" method="post">
                                 @csrf
                                 <div class="row">

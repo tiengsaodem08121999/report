@@ -84,6 +84,18 @@ class MembersRepository implements MembersRepositoryInterface
                     ->get();
         return $member;
     }
+
+    /**
+     * Delete member from project.
+     */
+    public function deleteMemberFromProject(int $memberId): bool
+    {
+        $member = $this->find($memberId);
+        if (! $member) {
+            return false;
+        }
+        return (bool) $member->update(['project_id' => null]);
+    }
 }
 
 

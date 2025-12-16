@@ -44,6 +44,11 @@ interface ProjectsRepositoryInterface
      * Delete a project by id.
      */
     public function delete(int $id): bool;
+
+    /**
+     * Find project with member.
+     */
+    public function getProjetWithMember(): Collection;
 }
 
 
